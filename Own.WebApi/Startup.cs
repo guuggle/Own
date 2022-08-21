@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.IO;
 
@@ -36,7 +37,7 @@ namespace Own.WebApi
                     Description = "This is My Own API!",
                     Contact = new OpenApiContact
                     {
-                        Name = "gusong",
+                        Name = "guuggle",
                         Email = "kandejianer@gmail.com"
                     },
                     License = new OpenApiLicense
@@ -99,6 +100,8 @@ namespace Own.WebApi
                     c.DisplayRequestDuration();
                 });
             }
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

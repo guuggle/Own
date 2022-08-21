@@ -37,6 +37,13 @@ namespace Own.WebApi.Controllers
         public IEnumerable<object> GetData()
         {
             var rng = new Random();
+
+            for (int i = 0; i < 50; i++)
+            {
+                _logger.LogInformation("value of i is {ivalue}", i);
+            }
+
+            throw new Exception("throwing a new exception!!!");
             return Enumerable.Range(1, 5).Select(index => new
             {
                 Date = DateTime.Now.AddDays(index),
