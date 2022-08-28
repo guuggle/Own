@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 
 namespace Own.WebApi.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class TestController : ApiBaseController
     {
         private static readonly string[] Summaries = new[]

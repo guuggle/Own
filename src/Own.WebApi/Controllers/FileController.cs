@@ -10,9 +10,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Own.WebApi.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class FileController : ApiBaseController
     {
         /// <summary>
