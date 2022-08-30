@@ -1,10 +1,10 @@
-﻿using Own.Application;
-using Own.Core;
+﻿using Own.Application.Interfaces;
+using Own.Domain.Entites;
 using System;
 
 namespace Own.Infrastructure.Service
 {
-    public class SysUserService : ISysUserService
+    internal class SysUserService : ISysUserService
     {
         public SysUser GetSysUser(string userId)
         {

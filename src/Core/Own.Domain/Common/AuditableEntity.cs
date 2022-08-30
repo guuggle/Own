@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Own.Core.Common
+namespace Own.Domain.Common
 {
     internal class AuditableEntity
     {

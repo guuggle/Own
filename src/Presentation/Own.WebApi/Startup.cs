@@ -4,8 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Own.Application;
+using Own.Application.Interfaces;
 using Own.Infrastructure.Service;
+using Own.Infrastructure.ServiceCollectionExtensions;
 using Serilog;
 using System;
 using System.IO;
@@ -74,7 +75,7 @@ namespace Own.WebApi
                 });
             });
 
-            services.AddScoped<ISysUserService, SysUserService>();
+            services.AddInfrastructure();
         }
 
         /// <summary>

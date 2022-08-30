@@ -14,11 +14,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Pages\swaggerindex.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Pages\swaggerindex.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Properties\launchSettings.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,8 +46,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Own.Application\Own.Application.csproj" />
-    <ProjectReference Include="..\Own.Infrastructure\Own.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Core\Own.Application\Own.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Own.Infrastructure\Own.Infrastructure.csproj" />
   </ItemGroup>
 
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Own.Core
+namespace Own.Domain.Entites
 {
     public class SysUser
     {

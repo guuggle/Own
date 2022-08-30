@@ -1,7 +1,7 @@
-﻿using Own.Core;
+﻿using Own.Domain.Entites;
 using System;
 
-namespace Own.Application
+namespace Own.Application.Interfaces
 {
     public interface ISysUserService
     {

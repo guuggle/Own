@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Own.Application;
-using Own.Core;
+using Own.Application.Interfaces;
+using Own.Domain.Entites;
 
 namespace Own.WebApi.Controllers
 {
