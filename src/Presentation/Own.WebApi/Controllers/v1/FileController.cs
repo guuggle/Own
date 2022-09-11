@@ -7,8 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Net.Mime;
 
-namespace Own.WebApi.Controllers
+namespace Own.WebApi.Controllers.v1
 {
     public class FileController : ApiBaseController
     {
@@ -18,11 +19,14 @@ namespace Own.WebApi.Controllers
         /// <param name="fileName">文件名</param>
         /// <returns></returns>
         [HttpGet]
-        [Produces("application/octet-stream", Type = typeof(FileContentResult))]
-        public IActionResult GetFile(string fileName)
+        [Produces(MediaTypeNames.Application.Octet)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetFile(string fileName)
         {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FileRepo", fileName);
-            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            if (!System.IO.File.Exists(path))
+                return BadRequest("file not exist");
+            byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(path);
             return File(fileBytes, "application/octet-stream", fileName);
         }
 

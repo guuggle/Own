@@ -17,6 +17,7 @@ namespace Own.WebApi
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
+            Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory; // set log directory to current domain path
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();

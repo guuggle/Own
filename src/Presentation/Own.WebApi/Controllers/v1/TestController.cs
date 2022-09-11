@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Own.WebApi.Controllers
+namespace Own.WebApi.Controllers.v1
 {
     public class TestController : ApiBaseController
     {
@@ -31,7 +31,7 @@ namespace Own.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<object> GetData()
+        public ActionResult<object> GetData()
         {
             var rng = new Random();
 
@@ -40,14 +40,13 @@ namespace Own.WebApi.Controllers
                 _logger.LogInformation("value of i is {ivalue}", i);
             }
 
-            throw new Exception("throwing a new exception!!!");
-            return Enumerable.Range(1, 5).Select(index => new
+            return Ok(Enumerable.Range(1, 5).Select(index => new
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
-            .ToArray();
+            .ToArray());
         }
 
     }

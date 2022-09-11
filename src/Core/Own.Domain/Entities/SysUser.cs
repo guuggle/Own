@@ -1,12 +1,19 @@
-﻿using System;
+﻿using Own.Domain.Common;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Own.Domain.Entites
 {
-    public class SysUser
+    [Table("sys_user")]
+    public class SysUser : AuditableBaseEntity<string>
     {
-        public string Id { get; set; }
+        [Column("user_id")]
         public string UserId { get; set; }
+        [Column("login_name")]
         public string LoginName { get; set; }
-        public string Password { get; set; }
+        [Column("login_pwd")]
+        public string LoginPwd { get; set; }
+        [Column("user_name")]
+        public string UserName { get; set; }
     }
 }
