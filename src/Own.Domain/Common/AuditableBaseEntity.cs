@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Own.Domain.Common
 {
-    public class AuditableBaseEntity<T> : BaseEntity<T>, AuditableEntity
+    public class AuditableBaseEntity : BaseEntity, AuditableEntity
     {
         [Column("created")]
         public DateTime Created { get; set; }

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Own.Domain.Common
 {
-    public abstract class BaseEntity<T>
+    public abstract class BaseEntity
     {
-        public T Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
     }
 }

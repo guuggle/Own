@@ -2,9 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Own.Application.Interfaces;
+using Own.Application.Interfaces.Authentication;
 using Own.Infrastructure.Persistence;
 using Own.Infrastructure.Repository;
-using Own.Infrastructure.Service;
+using Own.Infrastructure.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Own.Infrastructure
             });
             services.AddScoped<IOwnDbContext, OwnDbContext>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             return services;
         }
     }

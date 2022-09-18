@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Own.Application.Services.Authentication;
@@ -18,12 +19,11 @@ namespace Own.WebApi.Controllers.v1
         }
 
         [HttpPost("register")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult Register(RegisterRequest request)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Register(RegisterRequest request)
         {
-            var authResult = _service.Register(
-                request.FirstName,
-                request.LastName,
+            var authResult = await _service.Register(
+                request.UserName,
                 request.Email,
                 request.Password);
 
@@ -32,31 +32,30 @@ namespace Own.WebApi.Controllers.v1
                 errors => Problem(errors)
             );
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginRequest request)
+        {
+            var authResult = await _service.Login(
+                request.Email,
+                request.Password);
+
+            return authResult.Match(
+                authResult => Ok(MapResults(authResult)),
+                errors => Problem(errors)
+            );
+        }
+
 
         private static AuthenticationResponse MapResults(AuthenticationResult result)
         {
             return new AuthenticationResponse()
             {
                 Id = result.Id,
-                FirstName = result.FirstName,
-                LastName = result.LastName,
+                UserName = result.UserName,
                 Email = result.Email,
                 Token = result.Token
             };
         }
-
-        [HttpPost("login")]
-        public IActionResult Login(LoginRequest request)
-        {
-            var authResult = _service.Login(
-                request.Email,
-                request.Password);
-
-            return authResult.Match(
-                authResult => Ok(MapResults(authResult)),
-                errors => Problem(errors)
-            );
-        }
-
     }
 }

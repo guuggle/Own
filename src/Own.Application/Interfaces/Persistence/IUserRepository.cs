@@ -8,6 +8,7 @@ namespace Own.Application.Interfaces
 {
     public interface IUserRepository
     {
-        Task<SysUser> GetUser(string userid);
+        Task<SysUser> GetUserByEmail(string email);
+        Task AddUser(SysUser user);
     }
 }

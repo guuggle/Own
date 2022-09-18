@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Own.Application.Interfaces;
-using Own.Infrastructure.Service;
 using Own.Infrastructure;
 using Serilog;
 using System;

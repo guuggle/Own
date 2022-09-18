@@ -18,9 +18,14 @@ namespace Own.Infrastructure.Repository
             this._context = context;
         }
 
-        public async Task<SysUser> GetUser(string userid)
+        public async Task AddUser(SysUser user)
         {
-            return await _context.SysUser.FirstOrDefaultAsync(u => u.UserId == userid);
+            await Task.CompletedTask;
+        }
+
+        public async Task<SysUser> GetUserByEmail(string email)
+        {
+            return await _context.SysUser.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }
