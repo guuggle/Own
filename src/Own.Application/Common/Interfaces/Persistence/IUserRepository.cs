@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Own.Application.Interfaces
+namespace Own.Application.Common.Interfaces.Persistence
 {
     public interface IUserRepository
     {

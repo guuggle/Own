@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using System;
-using Own.Application.Interfaces.Authentication;
+using Own.Application.Common.Interfaces.Authentication;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Own.Infrastructure.Authentication
 {
@@ -7,7 +9,7 @@ namespace Own.Infrastructure.Authentication
     {
         public string CreateToken(string userId, string userName)
         {
-            return "123123123";
+            throw new NotImplementedException();
         }
     }
 }

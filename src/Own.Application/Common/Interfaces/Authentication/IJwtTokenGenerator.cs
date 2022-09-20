@@ -1,5 +1,5 @@
 using System;
-namespace Own.Application.Interfaces.Authentication
+namespace Own.Application.Common.Interfaces.Authentication
 {
     public interface IJwtTokenGenerator
     {

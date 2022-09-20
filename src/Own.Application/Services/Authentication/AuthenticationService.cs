@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Own.Application.Interfaces;
-using Own.Application.Interfaces.Authentication;
+using Own.Application.Common.Interfaces.Authentication;
+using Own.Application.Common.Interfaces.Persistence;
 using Own.Domain.Entites;
 using Own.Domain.Errors;
 using Own.Domain.OResult;

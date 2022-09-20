@@ -1,14 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Own.Application.Interfaces;
-using Own.Application.Interfaces.Authentication;
 using Own.Infrastructure.Persistence;
 using Own.Infrastructure.Repository;
 using Own.Infrastructure.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Own.Application.Common.Interfaces;
+using Own.Application.Common.Interfaces.Persistence;
+using Own.Application.Common.Interfaces.Authentication;
+using Own.Application.Common.Interfaces.Services;
+using Own.Infrastructure.Services;
 
 namespace Own.Infrastructure
 {
@@ -23,6 +26,7 @@ namespace Own.Infrastructure
             services.AddScoped<IOwnDbContext, OwnDbContext>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             return services;
         }
     }

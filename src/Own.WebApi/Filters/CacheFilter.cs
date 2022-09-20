@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Own.Infrastructure.CachingInMemory;
 using Own.Infrastructure.Extensions;
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Own.WebApi.Filters
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class CachedAttribute : Attribute, IAsyncResourceFilter
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+    public class CacheFilter : Attribute, IAsyncResourceFilter
     {
         private readonly int _absoluteDuration;
         private readonly int _slidingDuration;
@@ -29,7 +27,7 @@ namespace Own.WebApi.Filters
         /// 相关文档说明
         /// https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-3.1#dependency-injection-1
         /// </remarks>
-        public CachedAttribute(int absoluteDuration, int slidingDuration)
+        public CacheFilter(int absoluteDuration, int slidingDuration)
         {
             if (slidingDuration > absoluteDuration)
                 throw new ArgumentOutOfRangeException(
@@ -38,7 +36,7 @@ namespace Own.WebApi.Filters
             _slidingDuration = slidingDuration;
         }
 
-        public CachedAttribute()
+        public CacheFilter()
         {
             _absoluteDuration = 60 * 10;
             _slidingDuration = 60 * 5;
@@ -46,6 +44,7 @@ namespace Own.WebApi.Filters
 
         public async Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
         {
+            // TODO: 性能优化
             string key = $"{context.HttpContext.Request.Path}{context.HttpContext.Request.QueryString.Value}";
 
             var cachedValue = CacheFactory.Get<object>(key);

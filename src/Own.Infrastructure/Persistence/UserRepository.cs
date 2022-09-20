@@ -1,11 +1,12 @@
-﻿using Own.Application.Interfaces;
-using Own.Domain.Entites;
+﻿using Own.Domain.Entites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Own.Application.Common.Interfaces.Persistence;
+using Own.Application.Common.Interfaces;
 
 namespace Own.Infrastructure.Repository
 {
