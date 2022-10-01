@@ -1,14 +1,13 @@
-using System;
-using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Own.Application.Services.Authentication;
 using Own.Contracts.Authentication;
-using Own.Domain.OResult;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Own.WebApi.Controllers.v1
 {
+    [AllowAnonymous]
     public class AuthenticationController : ApiBaseController
     {
         private readonly IAuthenticationService _service;

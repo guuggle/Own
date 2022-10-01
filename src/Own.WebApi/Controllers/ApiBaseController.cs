@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mime;
 using Own.Domain.OResult;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Own.WebApi.Controllers
 {
@@ -20,6 +20,7 @@ namespace Own.WebApi.Controllers
     /// </summary>
     [ApiController]
 #pragma warning restore CS1570 // XML comment has badly formed XML
+    [Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ApiBaseController : ControllerBase
     {

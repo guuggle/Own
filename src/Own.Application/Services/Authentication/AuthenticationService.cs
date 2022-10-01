@@ -20,9 +20,9 @@ namespace Own.Application.Services.Authentication
             this._jwtTokenGenerator = tokenGenerator;
             this._userRepository = userRepository;
         }
+
         public async Task<OResult<AuthenticationResult>> Login(string email, string password)
         {
-            var a = Guid.NewGuid().ToString();
             // query user
             var user = await _userRepository.GetUserByEmail(email);
             if (user is null)
