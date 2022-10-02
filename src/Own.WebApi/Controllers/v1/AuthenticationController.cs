@@ -7,6 +7,7 @@ using MediatR;
 using Own.Application.Authentication.Commands.Register;
 using Own.Application.Authentication.Common;
 using Own.Application.Authentication.Queries.Login;
+using MapsterMapper;
 
 namespace Own.WebApi.Controllers.v1
 {
@@ -15,22 +16,23 @@ namespace Own.WebApi.Controllers.v1
     public class AuthenticationController : ApiBaseController
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public AuthenticationController(IMediator mediator)
+        public AuthenticationController(IMediator mediator, IMapper mapper)
         {
             this._mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
-            var authResult = await _mediator.Send(new RegisterCommand(request.UserName,
-                request.Email,
-                request.Password));
+            var command = _mapper.Map<RegisterCommand>(request);
+            var authResult = await _mediator.Send(command);
 
             return authResult.Match(
-                authResult => Ok(MapResults(authResult)),
+                authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
                 errors => Problem(errors)
             );
         }
@@ -38,27 +40,14 @@ namespace Own.WebApi.Controllers.v1
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            var authResult = await _mediator.Send(
-                new LoginQuery(
-                    request.Email,
-                    request.Password));
+            var query = _mapper.Map<LoginQuery>(request);
+            var authResult = await _mediator.Send(query);
 
             return authResult.Match(
-                authResult => Ok(MapResults(authResult)),
+                authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
                 errors => Problem(errors)
             );
         }
 
-
-        private static AuthenticationResponse MapResults(AuthenticationResult result)
-        {
-            return new AuthenticationResponse()
-            {
-                Id = result.User.Id,
-                UserName = result.User.UserName,
-                Email = result.User.Email,
-                Token = result.Token
-            };
-        }
     }
 }
