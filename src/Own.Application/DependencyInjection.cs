@@ -1,9 +1,5 @@
-﻿using System.Net;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Own.Application.Services.Authentication;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 namespace Own.Application
 {
@@ -11,7 +7,8 @@ namespace Own.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddMediatR(typeof(DependencyInjection).Assembly);
+            // services.AddScoped<IAuthenticationService, AuthenticationService>();
             return services;
         }
     }

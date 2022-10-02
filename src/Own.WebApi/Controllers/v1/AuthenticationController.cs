@@ -1,30 +1,33 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Own.Application.Services.Authentication;
 using Own.Contracts.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using MediatR;
+using Own.Application.Authentication.Commands.Register;
+using Own.Application.Authentication.Common;
+using Own.Application.Authentication.Queries.Login;
 
 namespace Own.WebApi.Controllers.v1
 {
     [AllowAnonymous]
+    [Route("auth")]
     public class AuthenticationController : ApiBaseController
     {
-        private readonly IAuthenticationService _service;
+        private readonly IMediator _mediator;
 
-        public AuthenticationController(IAuthenticationService service)
+        public AuthenticationController(IMediator mediator)
         {
-            this._service = service;
+            this._mediator = mediator;
         }
 
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
-            var authResult = await _service.Register(
-                request.UserName,
+            var authResult = await _mediator.Send(new RegisterCommand(request.UserName,
                 request.Email,
-                request.Password);
+                request.Password));
 
             return authResult.Match(
                 authResult => Ok(MapResults(authResult)),
@@ -35,9 +38,10 @@ namespace Own.WebApi.Controllers.v1
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            var authResult = await _service.Login(
-                request.Email,
-                request.Password);
+            var authResult = await _mediator.Send(
+                new LoginQuery(
+                    request.Email,
+                    request.Password));
 
             return authResult.Match(
                 authResult => Ok(MapResults(authResult)),
@@ -50,9 +54,9 @@ namespace Own.WebApi.Controllers.v1
         {
             return new AuthenticationResponse()
             {
-                Id = result.Id,
-                UserName = result.UserName,
-                Email = result.Email,
+                Id = result.User.Id,
+                UserName = result.User.UserName,
+                Email = result.User.Email,
                 Token = result.Token
             };
         }

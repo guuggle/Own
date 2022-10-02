@@ -6,14 +6,12 @@ using Own.Infrastructure.Persistence;
 using Own.Infrastructure.Repository;
 using Own.Infrastructure.Authentication;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using Own.Application.Common.Interfaces;
 using Own.Application.Common.Interfaces.Persistence;
 using Own.Application.Common.Interfaces.Authentication;
 using Own.Application.Common.Interfaces.Services;
 using Own.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Own.Infrastructure
@@ -39,7 +37,11 @@ namespace Own.Infrastructure
         /// Addxxx如AddJwtBear, AddCookie等等都有各自默认名字
         /// 如需配置多个Scheme，分别指定好SchemeName，可以在AddAuthentication时指定默认SchemeName
         /// 这样可灵活使用Authorize特性
-        /// <see cref="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/limitingidentitybyscheme?view=aspnetcore-6.0"/>
+        /// 
+        /// TODO: Policy以及AddAuthentication如何选择正确Scheme
+        /// https://source.dot.net/#Microsoft.AspNetCore.Authentication/AuthenticationMiddleware.cs,64b21069734b4c29
+        /// https://learn.microsoft.com/en-us/aspnet/core/security/authorization/limitingidentitybyscheme?view=aspnetcore-6.0"
+        /// 
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
