@@ -9,7 +9,6 @@ using Serilog;
 using System;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Own.WebApi.Errors;
 using Own.Application;

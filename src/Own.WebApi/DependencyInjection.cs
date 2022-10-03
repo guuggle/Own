@@ -4,7 +4,6 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Own.WebApi.Errors;
 
@@ -25,7 +24,6 @@ namespace Own.WebApi
                 config.ReportApiVersions = true;
             });
 
-            services.AddValidatorsFromAssemblyContaining<Startup>();
             services
                 .AddControllers()
                 .AddMvcOptions(options =>
